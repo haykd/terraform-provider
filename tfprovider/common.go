@@ -37,3 +37,7 @@ type DataResourceType = common.DataResourceType
 type ManagedResourceReadRequest = common.ManagedResourceReadRequest
 
 type ManagedResourceReadResponse = common.ManagedResourceReadResponse
+
+type DataResourceReadRequest = common.DataResourceReadRequest
+
+type DataResourceReadResponse = common.DataResourceReadResponse

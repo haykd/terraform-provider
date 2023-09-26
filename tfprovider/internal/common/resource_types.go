@@ -30,6 +30,9 @@ type ManagedResourceType interface {
 // new protocol features, so no packages outside of this module should attempt
 // to implement it.
 type DataResourceType interface {
+	// Read asks the current state of the data resource.
+	Read(context.Context, DataResourceReadRequest) (DataResourceReadResponse, Diagnostics)
+
 	// Sealed is a do-nothing method that exists only to represent that this
 	// interface may not be implemented by any type outside of this module,
 	// to allow the interface to expand in future to support new provider

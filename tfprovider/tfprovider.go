@@ -58,6 +58,14 @@ type Provider interface {
 	// method. An unconfigured provider always returns nil.
 	ManagedResourceType(name string) ManagedResourceType
 
+	// DataResourceType returns an object representing the data source
+	// type with the given name, or nil if the provider has no such managed
+	// data resource.
+	//
+	// The provider must be configured using [Configure] before calling this
+	// method. An unconfigured provider always returns nil.
+	DataResourceType(name string) DataResourceType
+
 	// Close kills the child process for this provider plugin, rendering the
 	// reciever unusable. Any further calls on the object after Close returns
 	// cause undefined behavior.

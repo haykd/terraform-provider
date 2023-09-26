@@ -13,3 +13,11 @@ type ManagedResourceReadResponse struct {
 	RefreshedValue cty.Value
 	OpaquePrivate  []byte
 }
+
+type DataResourceReadRequest struct {
+	Config cty.Value
+}
+
+type DataResourceReadResponse struct {
+	State cty.Value
+}

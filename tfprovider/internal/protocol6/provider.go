@@ -33,10 +33,11 @@ func NewProvider(ctx context.Context, plugin *rpcplugin.Plugin, clientProxy inte
 	}
 
 	return &Provider{
-		client:     client,
-		plugin:     plugin,
-		schema:     schema,
-		configured: false,
+		client:       client,
+		plugin:       plugin,
+		schema:       schema,
+		configured:   false,
+		configuredMu: &sync.Mutex{},
 	}, nil
 }
 
@@ -135,6 +136,19 @@ func (p *Provider) ManagedResourceType(typeName string) common.ManagedResourceTy
 		return nil
 	}
 	return &ManagedResourceType{
+		client:   p.client,
+		typeName: typeName,
+		schema:   schema,
+	}
+}
+
+func (p *Provider) DataResourceType(typeName string) common.DataResourceType {
+	schema, ok := p.schema.DataResourceTypes[typeName]
+	if !ok {
+		return nil
+	}
+
+	return &DataResourceType{
 		client:   p.client,
 		typeName: typeName,
 		schema:   schema,
